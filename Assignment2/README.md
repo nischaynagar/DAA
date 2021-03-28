@@ -62,7 +62,12 @@ The probability of Knight to remain in the chessboard.
 **Test case**
 
 ```
+Enter the size of chessboard 8
+Enter the number of steps 3
+Enter the space-separated position of knight 0 0
+0.125
 
+Process returned 0 (0x0)   execution time : 8.055 s
 ```
 
 ---

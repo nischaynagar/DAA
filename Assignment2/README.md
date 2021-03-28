@@ -90,7 +90,7 @@ Base case: if the number of steps is 0, then the probability that the Knight wil
 
 **Time Complexity**
 
-O(NxNxKx8) which is O(NxNxK), where N is the size of the board and K is the number of steps
+O(NxNxK), where N is the size of the board and K is the number of steps
 
 **Space Complexity**
 

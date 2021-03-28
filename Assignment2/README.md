@@ -17,9 +17,11 @@
 
 ## Problem Statement
 
-Given an array arr[] of n numbers and a number K, find the number of
-subsets of arr[] having XOR of elements as K. Solve using Dynamic
-programming.
+Given an NxN chessboard and a Knight at position (x,y). The Knight has to
+take exactly K steps, where at each step it chooses any of the 8 directions
+uniformly at random. What is the probability that the Knight remains in
+the chessboard after taking K steps, with the condition that it can’t enter
+the board again once it leaves it? Solve using Dynamic programming.
 
 ---
 

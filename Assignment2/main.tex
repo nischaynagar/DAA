@@ -1,0 +1,179 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{pgfplots}
+\usepackage{graphicx}
+\lstset { %
+    language=C++,
+    backgroundcolor=\color{black!5}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{DAA Assignment-05\\
+}
+
+\author{\IEEEauthorblockN{ Nischay Nagar }
+\IEEEauthorblockA{\textit{IIT2019198} \\
+}
+\and
+\IEEEauthorblockN{Abhishek Bithu}
+\IEEEauthorblockA{\textit{IIT2019199} \\
+}
+\and
+\IEEEauthorblockN{Raj Chandra}
+\IEEEauthorblockA{\textit{IIT2019200} \\
+}
+}
+
+\maketitle
+
+\begin{abstract}
+In this report we designed a Dynamic Programming algorithm to find the propablity of a knight to remain in the cheessboard after k number of steps.
+
+\end{abstract}
+
+\section{Introduction}
+It can be observed that at every step the Knight has 8 choices to choose from. Suppose, the Knight has to take k steps and after taking the Kth step the knight reaches (x,y). There are 8 different positions from where the Knight can reach to (x,y) in one step, and they are: (x+1,y+2), (x+2,y+1), (x+2,y-1), (x+1,y-2), (x-1,y-2), (x-2,y-1), (x-2,y+1), (x-1,y+2).
+If the probablities of reaching these 8 positions after k-1 steps is already known then, the final probablity after k steps will simply be equal to the (Σ probability of reaching each of these 8 positions after K-1 steps)/8.
+
+Here we are dividing by 8 because each of these 8 positions has 8 choices and position (x,y) is one of the choices.
+
+For the positions that lie outside the board, we will either take their probabilities as 0 or simply neglect it.
+
+Since we need to keep track of the probabilities at each position for every number of steps, we need Dynamic Programming to solve this problem.
+We are going to take an array dp[x][y][steps] which will store the probability of reaching (x,y) after (steps) number of moves.
+
+Base case: if the number of steps is 0, then the probability that the Knight will remain inside the board is 1
+
+
+\section{Algorithm Analysis}
+\textbf{Time complexity:}\\
+
+O(NxNxKx8) which is O(NxNxK), where N is the size of the board and K is the number of steps
+\\
+\textbf{Space complexity:}\\
+
+O(NxNxK)
+
+\section{Conclusion}
+We can observe that by Dynamic Programming Approach we can easily solve the given problem and get better time-complexity.
+
+ \section{References}
+\color{blue}1.{\url{https://www.geeksforgeeks.org/dynamic-programming/} }\\
+
+
+\color{black}
+\
+\begin{titlepage}
+    \begin{center}
+        \Huge
+        \section*{Appendix}
+        \end{center}
+         \textbf{Code for implementation of this paper is given below:}
+\begin{lstlisting}[language=C++,caption=Code for this paper]
+#include <bits/stdc++.h>
+using namespace std;
+
+int N = 0;
+
+int dx[] = {1, 2, 2, 1, -1, -2, -2, -1};
+int dy[] = {2, 1, -1, -2, -2, -1, 1, 2};
+
+bool inside(int x, int y)
+{
+    return (x >= 0 and x < N and y >= 0 and y < N);
+}
+
+double findProb(int start_x, int start_y, int steps)
+{
+    double dp1[N][N][steps + 1];
+
+    for (int i = 0; i < N; ++i)
+        for (int j = 0; j < N; ++j)
+            dp1[i][j][0] = 1;
+
+    for (int s = 1; s <= steps; ++s)
+    {
+
+        for (int x = 0; x < N; ++x)
+        {
+            for (int y = 0; y < N; ++y)
+            {
+                double prob = 0.0;
+
+                for (int i = 0; i < 8; ++i)
+                {
+                    int nx = x + dx[i];
+                    int ny = y + dy[i];
+
+                    if (inside(nx, ny))
+                        prob += dp1[nx][ny][s - 1] / 8.0;
+                }
+
+                dp1[x][y][s] = prob;
+            }
+        }
+    }
+
+    return dp1[start_x][start_y][steps];
+}
+
+int main()
+{
+    int K;
+    int x, y;
+    cout << "Enter the size of chessboard ";
+    cin >> N;
+    cout << "Enter the number of steps ";
+    cin >> K;
+    cout << "Enter the space-separated position of knight ";
+    cin >> x >> y;
+    cout << findProb(x, y, K) << endl;
+
+    return 0;
+}
+    
+   
+\end{lstlisting}
+\end{titlepage}
+\end{document}

@@ -13,11 +13,11 @@ bool inside(int x, int y)
 
 double findProb(int start_x, int start_y, int steps)
 {
-    double dp1[N][N][steps + 1];
+    double dp[N][N][steps + 1];
 
     for (int i = 0; i < N; ++i)
         for (int j = 0; j < N; ++j)
-            dp1[i][j][0] = 1;
+            dp[i][j][0] = 1;
 
     for (int s = 1; s <= steps; ++s)
     {
@@ -34,15 +34,15 @@ double findProb(int start_x, int start_y, int steps)
                     int ny = y + dy[i];
 
                     if (inside(nx, ny))
-                        prob += dp1[nx][ny][s - 1] / 8.0;
+                        prob += dp[nx][ny][s - 1] / 8.0;
                 }
 
-                dp1[x][y][s] = prob;
+                dp[x][y][s] = prob;
             }
         }
     }
 
-    return dp1[start_x][start_y][steps];
+    return dp[start_x][start_y][steps];
 }
 
 int main()

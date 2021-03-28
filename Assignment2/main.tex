@@ -97,8 +97,8 @@ Following is Dynamic Programming algorithm
 \item Check if this new position (nx, ny) is inside of the chessboard, if yes then add dp1[nx][ny][s - 1] / 8.0 to prob.
 \item Store the prob in dp[x][y][s].
 \item Keep repeating for the given number of steps.
-\item The required probability will be stored in dp[start_x][start_y][k], where (start_x, start_y) are the given initial position of the knight and k is the number of steps.
-
+\item Required probability is stored as  dp[start\textunderscore x][start \textunderscore y][k], where,start\textunderscore x and start\textunderscore y are the starting position of knight and k is the number of moves
+\end{itemize}
 
 \section{Algorithm Analysis}
 \textbf{Time complexity:}\\

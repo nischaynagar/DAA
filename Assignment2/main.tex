@@ -85,6 +85,20 @@ We are going to take an array dp[x][y][steps] which will store the probability o
 
 Base case: if the number of steps is 0, then the probability that the Knight will remain inside the board is 1
 
+\section{Algorithm Design}
+Following is Dynamic Programming algorithm
+
+\begin{itemize}
+\item Define direction vectors for the knight. 
+\item Take an array dp[N, N, steps + 1] which will store the probability of reaching (x,y) after (steps) number of moves.
+\item Base case: if the number of steps is 0, then the probability that the Knight will remain inside the board is 1
+\item Take the position (x, y) after s number of steps.
+\item Take prob = 0.0 then check for each position reachable from (x, y) using the direction vectors and store it in a new position (nx, ny).
+\item Check if this new position (nx, ny) is inside of the chessboard, if yes then add dp1[nx][ny][s - 1] / 8.0 to prob.
+\item Store the prob in dp[x][y][s].
+\item Keep repeating for the given number of steps.
+\item The required probability will be stored in dp[start_x][start_y][k], where (start_x, start_y) are the given initial position of the knight and k is the number of steps.
+
 
 \section{Algorithm Analysis}
 \textbf{Time complexity:}\\
@@ -93,7 +107,7 @@ O(NxNxK), where N is the size of the board and K is the number of steps
 \\
 \textbf{Space complexity:}\\
 
-O(NxNxK)
+O(NxNxK), where N is the size of the board and K is the number of steps
 
 \section{Conclusion}
 We can observe that by Dynamic Programming Approach we can easily solve the given problem and get better time-complexity.

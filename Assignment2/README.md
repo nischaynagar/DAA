@@ -94,7 +94,7 @@ O(NxNxK), where N is the size of the board and K is the number of steps
 
 **Space Complexity**
 
-O(NxNxK)
+O(NxNxK), where N is the size of the board and K is the number of steps
 
 ---
 

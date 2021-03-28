@@ -4,8 +4,8 @@
 | Enrollment No. | Name | GithubId |
 | -------------- | ---- | -------- |
 | IIT2019198 | Nischay Nagar | nischaynagar |
-| IIT2019199 | Abhishek Bithu | |
-| IIT2019200 | Raj Chandra | |
+| IIT2019199 | Abhishek Bithu | imabcharan |
+| IIT2019200 | Raj Chandra | RAJCHANDARA |
 
 **Group No-**"5"
 
@@ -69,7 +69,17 @@ g++ code.cpp
 
 ### Theory
 
----
+It can be observed that at every step the Knight has 8 choices to choose from. Suppose, the Knight has to take k steps and after taking the Kth step the knight reaches (x,y). There are 8 different positions from where the Knight can reach to (x,y) in one step, and they are: (x+1,y+2), (x+2,y+1), (x+2,y-1), (x+1,y-2), (x-1,y-2), (x-2,y-1), (x-2,y+1), (x-1,y+2).
+If the probablities of reaching these 8 positions after k-1 steps is already known then, the final probablity after k steps will simply be equal to the (Σ probability of reaching each of these 8 positions after K-1 steps)/8.
+
+Here we are dividing by 8 because each of these 8 positions has 8 choices and position (x,y) is one of the choices.
+
+For the positions that lie outside the board, we will either take their probabilities as 0 or simply neglect it.
+
+Since we need to keep track of the probabilities at each position for every number of steps, we need Dynamic Programming to solve this problem.
+We are going to take an array dp[x][y][steps] which will store the probability of reaching (x,y) after (steps) number of moves.
+
+Base case: if the number of steps is 0, then the probability that the Knight will remain inside the board is 1
 
 ### Analysis
 

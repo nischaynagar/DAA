@@ -103,7 +103,7 @@ Naive Solution:-
 Time Complexity: Θ(n!)
 
 Dynamic Programming solution:-
-Since, there are at most O(n*2^n) subproblems, and each one takes linear time to solve. The total running time is therefore O(n^2*2^n). The time complexity is much less than O(n!), but still exponential. Space required is also exponential.
+Since, there are at most O(n\*2^n) subproblems, and each one takes linear time to solve. The total running time is therefore O(n^2\*2^n). The time complexity is much less than O(n!), but still exponential. Space required is also exponential.
 
 ---
 

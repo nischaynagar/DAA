@@ -1,0 +1,183 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{pgfplots}
+\usepackage{graphicx}
+\lstset { %
+    language=C++,
+    backgroundcolor=\color{black!5}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{DAA Assignment-05\\
+}
+
+\author{\IEEEauthorblockN{ Nischay Nagar }
+\IEEEauthorblockA{\textit{IIT2019198} \\
+}
+\and
+\IEEEauthorblockN{Abhishek Bithu}
+\IEEEauthorblockA{\textit{IIT2019199} \\
+}
+\and
+\IEEEauthorblockN{Raj Chandra}
+\IEEEauthorblockA{\textit{IIT2019200} \\
+}
+}
+
+\maketitle
+
+\begin{abstract}
+In this report we designed a Dynamic Programming algorithm for solving the Travelling Salesmen Problem(TSP).
+.(For a set of cities and distance between every pair of cities, the problem is to find the shortest possible route that visits every city exactly once and returns to the starting point)
+\end{abstract}
+
+\section{Introduction}
+The travelling salesman problem (also called the traveling salesperson problem or TSP) asks the following question: "Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once and returns to the origin city?" It is an NP-hard problem in combinatorial optimization, important in theoretical computer science and operations research.
+
+The travelling purchaser problem and the vehicle routing problem are both generalizations of TSP.
+
+In the theory of computational complexity, the decision version of the TSP (where given a length L, the task is to decide whether the graph has a tour of at most L) belongs to the class of NP-complete problems. Thus, it is possible that the worst-case running time for any algorithm for the TSP increases superpolynomially (but no more than exponentially) with the number of cities.
+\section{Algorithm Design}
+
+ \textbf{Following is Naive algorithm:}\\
+
+\begin{itemize}
+\item Consider city 1 as the starting and ending point.
+\item Generate all (n-1)! Permutations of cities.
+\item Calculate cost of every permutation and keep track of minimum cost permutation.
+\item Return the permutation with minimum cost.
+\end{itemize}
+
+\textbf{Following is Dynamic Programming Algorithm:}\\
+
+Let the given set of vertices be {1, 2, 3, 4,….n}. Let us consider 1 as starting and ending point of output. For every other vertex i (other than 1), we find the minimum cost path with 1 as the starting point, i as the ending point and all vertices appearing exactly once. Let the cost of this path be cost(i), the cost of corresponding Cycle would be cost(i) + dist(i, 1) where dist(i, 1) is the distance from i to 1. Finally, we return the minimum of all [cost(i) + dist(i, 1)] values.
+
+To calculate cost(i) using Dynamic Programming, we need to have some recursive relation in terms of sub-problems. Let us define a term C(S, i) be the cost of the minimum cost path visiting each vertex in set S exactly once, starting at 1 and ending at i.
+We start with all subsets of size 2 and calculate C(S, i) for all subsets where S is the subset, then we calculate C(S, i) for all subsets S of size 3 and so on.
+
+Note :1 must be present in every subset.
+
+If size of S is 2, then S must be {1, i},
+C(S, i) = dist(1, i)
+Else if size of S is greater than 2.
+C(S, i) = min { C(S-{i}, j) + dis(j, i)} where j belongs to S, j != i and j != 1.
+
+For a set of size n, we consider n-2 subsets each of size n-1 such that all subsets don’t have nth in them.
+Using the above recurrence relation, we can write dynamic programming based solution. There are at most O(n*2^n) subproblems, and each one takes linear time to solve. The total running time is therefore O(n^2*2^n). The time complexity is much less than O(n!), but still exponential. Space required is also exponential. So this approach is also infeasible even for slightly higher number of vertices.
+
+\section{Algorithm Analysis}
+\textbf{Time complexity:}\\
+
+
+Naive Solution:-
+Time Complexity: Θ(n!)
+
+Dynamic Programming solution:-
+Since, there are at most O(n*2^{n}) subproblems, and each one takes linear time to solve. The total running time is therefore O(n^{2}*2^{n}). The time complexity is much less than O(n!), but still exponential. Space required is also exponential.
+
+\\
+
+
+\section{Conclusion}
+TSP is a popular NP-Hard problem, but depending on the size of the input cities, it is possible to find an optimal or a near-optimal solution using various algorithms.
+ 
+\section{References}
+\color{blue}1.{\url{https://www.geeksforgeeks.org/dynamic-programming/} }\\
+
+
+\color{black}
+\
+\begin{titlepage}
+    \begin{center}
+        \Huge
+        \section*{Appendix}
+        \end{center}
+         \textbf{Code for implementation of this paper is given below:}
+\begin{lstlisting}[language=C++,caption=Code for this paper]
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int tsp(const vector<vector<int>> &cities, int pos, int visited, vector<vector<int>> &state)
+{
+    if (visited == ((1 << cities.size()) - 1))
+        return cities[pos][0]; // return to starting city
+
+    if (state[pos][visited] != INT_MAX)
+        return state[pos][visited];
+
+    for (int i = 0; i < cities.size(); ++i)
+    {
+        // can't visit ourselves unless we're ending & skip if already visited
+        if (i == pos || (visited & (1 << i)))
+            continue;
+
+        int distance = cities[pos][i] + tsp(cities, i, visited | (1 << i), state);
+        if (distance < state[pos][visited])
+            state[pos][visited] = distance;
+    }
+
+    return state[pos][visited];
+}
+
+int main()
+{
+    vector<vector<int>> cities = {{0, 10, 15, 20},
+                                    {10, 0, 35, 25},
+                                    {15, 35, 0, 30},
+                                    {20, 25, 30, 0}};
+
+    vector<vector<int>> state(cities.size());
+    for (auto &neighbors : state)
+        neighbors = vector<int>((1 << cities.size()) - 1, INT_MAX);
+
+    cout << "minimum: " << tsp(cities, 0, 1, state) << endl;
+
+    return 0;
+}
+
+   
+\end{lstlisting}
+\end{titlepage}
+\end{document}

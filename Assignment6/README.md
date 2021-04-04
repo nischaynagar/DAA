@@ -59,11 +59,10 @@ The cost of the shortest possible route that visits every city exactly once and 
 
 ```
 Input:
-n=4,
-vector<vector<int>> cities = {{0, 10, 15, 20},
-                            {10, 0, 35, 25},
-                            {15, 35, 0, 30},
-                            {20, 25, 30, 0}};
+cities = {{0, 10, 15, 20},
+        {10, 0, 35, 25},
+        {15, 35, 0, 30},
+        {20, 25, 30, 0}};
 
 Output: minimum: 80
 ```
